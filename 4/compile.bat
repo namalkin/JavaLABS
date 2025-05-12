@@ -1,12 +1,39 @@
 @echo off
-setlocal
-echo Компиляция исходников...
-if not exist build mkdir build
-javac -d build -cp "lib/*" src\com\gameportal\Main.java src\com\gameportal\utils\Counter.java src\com\gameportal\models\User.java src\com\gameportal\servlets\LoginServlet.java src\com\gameportal\servlets\PortalServlet.java src\com\gameportal\servlets\UploadServlet.java
-if %errorlevel% neq 0 (
-  echo Ошибка компиляции.
-  pause
-  exit /b %errorlevel%
+setlocal enabledelayedexpansion
+
+REM === Настройки ===
+set TOMCAT_HOME=C:\Program Files\Apache Software Foundation\Tomcat 11.0_JavaTomcat
+set PROJECT_DIR=%~dp0
+set DEST_DIR="%TOMCAT_HOME%\webapps\myportal"
+
+REM === Компиляция сервлетов в build ===
+echo [*] Компиляция Java файлов...
+if exist build rmdir /s /q build
+mkdir build
+set "JAVA_FILES="
+for /r webapps\ROOT\WEB-INF\classes %%f in (*.java) do (
+    set "JAVA_FILES=!JAVA_FILES! %%f"
 )
-echo Компиляция успешна.
-pause
+javac -cp "%TOMCAT_HOME%\lib\servlet-api.jar" -d build !JAVA_FILES!
+if errorlevel 1 (
+    echo [!] Ошибка компиляции!
+    exit /b 1
+)
+
+REM === Создание папки uploads, если не существует ===
+if not exist webapps\ROOT\uploads (
+    mkdir webapps\ROOT\uploads
+)
+
+REM === Удаление старой версии ===
+echo [*] Удаление старой папки myportal...
+rmdir /s /q %DEST_DIR%
+
+REM === Копирование исходников и ресурсов в Tomcat ===
+echo [*] Копирование файлов в Tomcat...
+xcopy /s /i /y webapps\ROOT %DEST_DIR%
+
+REM === Копирование .class файлов из build в Tomcat ===
+xcopy /s /i /y build\* "%TOMCAT_HOME%\webapps\myportal\WEB-INF\classes\"
+
+echo [✓] Готово! Теперь можно запускать сервер через run.bat

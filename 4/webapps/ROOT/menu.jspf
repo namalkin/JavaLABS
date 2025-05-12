@@ -1,0 +1,29 @@
+<!-- filepath: d:\create\contain\JavaLABS\4\webapps\ROOT\menu.jspf -->
+<%@ page pageEncoding="UTF-8" %>
+<%
+    String avatar = (String) session.getAttribute("avatar");
+%>
+<nav class="dashboard-menu">
+    <a href="dashboard">Кабинет</a>
+    <a href="games">Лучшие игры</a>
+    <a href="news">Новости игр</a>
+    <a href="reviews">Обзоры</a>
+    <a href="collections">Подборки</a>
+    <a href="profile">Профиль</a>
+    <% if ("Администратор".equals(role)) { %>
+        <a href="admin">Пользователи</a>
+    <% } %>
+    <% if ("Модератор".equals(role)) { %>
+        <a href="content">Добавить контент</a>
+    <% } %>
+    <div class="profile-menu">
+        <% if (avatar != null) { %>
+            <a href="profile" title="Профиль">
+                <img src="<%= avatar %>" alt="Аватар" class="profile-avatar">
+            </a>
+        <% } %>
+        <form action="logout" method="get" style="display:inline;">
+            <button type="submit" class="logout-btn">Выйти</button>
+        </form>
+    </div>
+</nav>

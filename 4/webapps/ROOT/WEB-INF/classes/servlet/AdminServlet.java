@@ -11,6 +11,16 @@ import java.io.IOException;
  * просмотр, добавление и изменение ролей пользователей.
  */
 public class AdminServlet extends HttpServlet {
+
+    /**
+     * Метод doGet() обрабатывает GET-запросы, проверяет роль пользователя,
+     * получает список пользователей и передает его в JSP-страницу.
+     *
+     * @param req  HttpServletRequest объект, содержащий запрос от клиента
+     * @param resp HttpServletResponse объект, содержащий ответ для клиента
+     * @throws ServletException если возникает ошибка при обработке запроса
+     * @throws IOException      если возникает ошибка ввода-вывода
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -25,6 +35,15 @@ public class AdminServlet extends HttpServlet {
         req.getRequestDispatcher("admin.jsp").forward(req, resp);
     }
 
+    /**
+     * Метод doPost() обрабатывает POST-запросы, проверяет роль пользователя,
+     * выполняет действия по добавлению пользователя или изменению его роли.
+     *
+     * @param req  HttpServletRequest объект, содержащий запрос от клиента
+     * @param resp HttpServletResponse объект, содержащий ответ для клиента
+     * @throws ServletException если возникает ошибка при обработке запроса
+     * @throws IOException      если возникает ошибка ввода-вывода
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {

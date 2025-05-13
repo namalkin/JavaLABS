@@ -3,7 +3,7 @@
     String now = (String) request.getAttribute("now");
     Object visits = request.getAttribute("visits");
     String role = (String) session.getAttribute("role");
-    java.util.List<String> newsList = (java.util.List<String>) request.getAttribute("newsList");
+    java.util.List<content.PortalContent.NewsPost> newsList = (java.util.List<content.PortalContent.NewsPost>) request.getAttribute("newsList");
 %>
 <html>
 <head>
@@ -22,8 +22,14 @@
         <h2>Новости игр</h2>
         <ul>
             <% if (newsList != null) {
-                for (String n : newsList) { %>
-                    <li><%= n %></li>
+                for (content.PortalContent.NewsPost n : newsList) { %>
+                    <li>
+                        <b>
+                            <a href="/myportal/newsview?id=<%= n.getId() %>"><%= n.getTitle() %></a>
+                        </b><br>
+                        <span><%= n.getText() %></span><br>
+                        <small>Автор: <%= n.getAuthor() %> | Просмотров: <%= n.getViews() %></small>
+                    </li>
             <%  }
             } %>
         </ul>

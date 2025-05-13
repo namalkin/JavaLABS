@@ -12,6 +12,13 @@ import java.io.File;
  */
 @WebListener
 public class AppContextListener implements ServletContextListener {
+
+    /**
+     * Метод contextInitialized() вызывается при инициализации контекста приложения.
+     * Он создает необходимые директории и инициализирует сервисы.
+     *
+     * @param sce ServletContextEvent объект, содержащий информацию о событии
+     */
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         // Создать директорию для счетчиков, если не существует

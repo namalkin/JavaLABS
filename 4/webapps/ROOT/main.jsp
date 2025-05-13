@@ -12,15 +12,21 @@
     </div>
     <div class="container">
         <h1>Добро пожаловать на игровой портал!</h1>
-        <form method="post" action="login" class="login-form">
-            <label>Имя пользователя:</label>
-            <input type="text" name="username" required><br>
-            <label>Пароль:</label>
-            <input type="password" name="password" required><br>
-            <input type="submit" value="Войти">
-        </form>
-        <div style="color:red;">
-            <%= request.getAttribute("error") != null ? request.getAttribute("error") : "" %>
+        <div class="login-block">
+            <div class="login-block-header">
+                <span class="login-block-icon">&#128100;</span>
+                <span class="login-block-title">Вход в аккаунт</span>
+            </div>
+            <form method="post" action="login" class="login-form">
+                <label>Имя пользователя:</label>
+                <input type="text" name="username" required>
+                <label>Пароль:</label>
+                <input type="password" name="password" required>
+                <input type="submit" value="Войти">
+            </form>
+            <div style="color:red;">
+                <%= request.getAttribute("error") != null ? request.getAttribute("error") : "" %>
+            </div>
         </div>
     </div>
 </body>

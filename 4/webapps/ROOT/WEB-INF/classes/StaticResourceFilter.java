@@ -8,6 +8,16 @@ import java.io.IOException;
  */
 @WebFilter("/*")
 public class StaticResourceFilter implements Filter {
+    
+    /**
+     * Метод doFilter() обрабатывает запросы к статическим ресурсам,
+     * пропуская их через фильтр, и передает управление следующему элементу цепочки фильтров.
+     * @param request  HttpServletRequest объект, содержащий запрос от клиента
+     * @param response HttpServletResponse объект, содержащий ответ для клиента
+     * @param chain    FilterChain объект, представляющий цепочку фильтров
+     * @throws IOException      если возникает ошибка ввода-вывода
+     * @throws ServletException если возникает ошибка при обработке запроса
+     */
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;

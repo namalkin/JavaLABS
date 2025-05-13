@@ -6,8 +6,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import service.VisitCounterService;
 
-// @WebServlet("/collections")
+
+/**
+ * Класс CollectionsServlet отображает страницу коллекций,
+ * увеличивает счетчик посещений и передает данные времени и количества посещений в collections.jsp.
+ * @WebServlet("/collections")
+ */
 public class CollectionsServlet extends HttpServlet {
+
+    /**
+     * Метод init() инициализирует объект VisitCounterService,
+     * который используется для подсчета посещений.
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

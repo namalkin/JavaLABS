@@ -9,9 +9,18 @@ import domain.User; // Добавьте эту строку
 /**
  * Класс LoginServlet обрабатывает вход пользователя,
  * устанавливает сессионные атрибуты и перенаправляет на dashboard или main.jsp.
+ * @WebServlet("/login")
  */
-// @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
+
+    /**
+     * Метод doGet() обрабатывает GET-запросы и перенаправляет на страницу входа.
+     *
+     * @param request  HttpServletRequest объект, содержащий запрос от клиента
+     * @param response HttpServletResponse объект, содержащий ответ для клиента
+     * @throws ServletException если возникает ошибка при обработке запроса
+     * @throws IOException      если возникает ошибка ввода-вывода
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

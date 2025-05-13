@@ -9,9 +9,19 @@ import service.VisitCounterService;
 /**
  * Класс ProfileServlet отображает страницу профиля пользователя,
  * ведет учет посещений профиля и передает соответствующие данные в profile.jsp.
+ * @WebServlet("/profile")
  */
-// @WebServlet("/profile")
 public class ProfileServlet extends HttpServlet {
+
+    /**
+     * Метод doGet() обрабатывает GET-запросы, увеличивает счетчик посещений,
+     * получает текущее время и передает данные в JSP-страницу.
+     *
+     * @param request  HttpServletRequest объект, содержащий запрос от клиента
+     * @param response HttpServletResponse объект, содержащий ответ для клиента
+     * @throws ServletException если возникает ошибка при обработке запроса
+     * @throws IOException      если возникает ошибка ввода-вывода
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -9,9 +9,14 @@ import service.VisitCounterService;
 /**
  * Класс GamesServlet отображает страницу лучших игр,
  * увеличивает счетчик посещений и передает данные времени и количества посещений в games.jsp.
+ * @WebServlet("/games")
  */
-// @WebServlet("/games")
 public class GamesServlet extends HttpServlet {
+
+    /**
+     * Метод init() инициализирует объект VisitCounterService,
+     * который используется для подсчета посещений.
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

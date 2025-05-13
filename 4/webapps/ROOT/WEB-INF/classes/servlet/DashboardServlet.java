@@ -12,9 +12,19 @@ import content.PortalContent;
 /**
  * Класс DashboardServlet отображает личный кабинет пользователя,
  * собирает статистику посещений и передает основные данные на dashboard.jsp.
+ * @WebServlet("/dashboard")
  */
-// @WebServlet("/dashboard")
 public class DashboardServlet extends HttpServlet {
+
+    /**
+     * Метод doGet() обрабатывает GET-запросы, проверяет сессию пользователя,
+     * собирает статистику посещений и передает данные на dashboard.jsp.
+     *
+     * @param request  HttpServletRequest объект, содержащий запрос от клиента
+     * @param response HttpServletResponse объект, содержащий ответ для клиента
+     * @throws ServletException если возникает ошибка при обработке запроса
+     * @throws IOException      если возникает ошибка ввода-вывода
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

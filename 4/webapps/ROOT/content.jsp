@@ -18,12 +18,15 @@
         <% } %>
         <form method="post">
             <label>Тип:</label>
-            <select name="type">
+            <select name="type" id="type-select" onchange="toggleNewsFields()">
                 <option value="news">Новость</option>
                 <option value="review">Обзор</option>
                 <option value="collection">Подборка</option>
             </select>
             <br>
+            <div id="news-fields">
+                <input type="text" name="title" placeholder="Заголовок новости" style="width:350px;" maxlength="100"><br>
+            </div>
             <textarea name="text" rows="3" cols="50" placeholder="Текст..." required></textarea>
             <br>
             <input type="submit" value="Добавить">
@@ -32,8 +35,12 @@
         <h3>Последние новости</h3>
         <ul>
             <% if (portalContent != null) {
-                for (String n : portalContent.getNews()) { %>
-                    <li><%= n %></li>
+                for (content.PortalContent.NewsPost n : portalContent.getNews()) { %>
+                    <li>
+                        <b><%= n.getTitle() %></b><br>
+                        <span><%= n.getText() %></span><br>
+                        <small>Автор: <%= n.getAuthor() %> | Просмотров: <%= n.getViews() %></small>
+                    </li>
             <%  }
             } %>
         </ul>
@@ -54,5 +61,12 @@
             } %>
         </ul>
     </div>
+    <script>
+        function toggleNewsFields() {
+            var type = document.getElementById('type-select').value;
+            document.getElementById('news-fields').style.display = (type === 'news') ? '' : 'none';
+        }
+        toggleNewsFields();
+    </script>
 </body>
 </html>

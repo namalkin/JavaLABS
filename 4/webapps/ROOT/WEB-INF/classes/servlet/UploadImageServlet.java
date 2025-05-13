@@ -11,10 +11,19 @@ import domain.User;
 /**
  * Класс UploadImageServlet обрабатывает загрузку изображений пользователями,
  * сохраняет файл и путь к аватару пользователя.
+ * @WebServlet("/upload")
  */
-// @WebServlet("/upload")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024)
 public class UploadImageServlet extends HttpServlet {
+
+    /**
+     * Метод doGet() обрабатывает GET-запросы и перенаправляет на страницу загрузки изображения.
+     *
+     * @param request  HttpServletRequest объект, содержащий запрос от клиента
+     * @param response HttpServletResponse объект, содержащий ответ для клиента
+     * @throws ServletException если возникает ошибка при обработке запроса
+     * @throws IOException      если возникает ошибка ввода-вывода
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

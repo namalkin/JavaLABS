@@ -113,4 +113,13 @@
         <url-pattern>/content</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>NewsViewServlet</servlet-name>
+        <servlet-class>servlet.NewsViewServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>NewsViewServlet</servlet-name>
+        <url-pattern>/newsview</url-pattern>
+    </servlet-mapping>
+
 </web-app>

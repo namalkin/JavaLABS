@@ -22,7 +22,7 @@
     <%@ include file="menu.jspf" %>
     <div class="container">
         <h2>Список игр</h2>
-        <form method="get" action="games.jsp">
+        <form method="get" action="games.jsp" class="games-search-form">
             <input type="text" name="search" placeholder="Поиск игр..." value="<%= search != null ? search : "" %>">
             <input type="submit" value="Найти">
         </form>

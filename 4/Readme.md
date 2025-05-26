@@ -63,10 +63,12 @@ classDiagram
         -String username
         -String password
         -Role role
-        -String avatarPath
+        -String imagePath
         +getUsername()
+        +getPassword()
         +getRole()
-        +getAvatarPath()
+        +getImagePath()
+        +setRole()
     }
     class Role {
         <<enum>>
@@ -81,33 +83,48 @@ classDiagram
         +getCount()
     }
     class PortalContent {
-        -List~News~ newsList
-        -List~Review~ reviewList
-        -List~Collection~ collectionList
+        -List~String~ bestGames
+        -List~NewsPost~ news
+        -List~String~ reviews
+        -List~String~ collections
+        +getBestGames()
+        +getNews()
+        +getReviews()
+        +getCollections()
+        +addNews()
+        +addReview()
+        +addCollection()
+        +addBestGame()
+        +getNewsById()
     }
-    class News {
+    class NewsPost {
+        -int id
         -String title
         -String text
-        -User author
+        -String author
+        -int views
+        +getId()
+        +getTitle()
+        +getText()
+        +getAuthor()
+        +getViews()
+        +incrementViews()
     }
-    class Review {
-        -String title
-        -String text
-        -User author
-    }
-    class Collection {
-        -String title
-        -String description
-        -User author
+    class UserService {
+        -Map~String, User~ users
+        +authenticate()
+        +getUser()
+        +getAvatar()
+        +addUser()
+        +setUserRole()
+        +getAllUsers()
     }
     User "1" -- "1" Role
-    User "1" -- "0..1" VisitCounter
-    PortalContent "1" o-- "*" News
-    PortalContent "1" o-- "*" Review
-    PortalContent "1" o-- "*" Collection
-    News "1" -- "1" User
-    Review "1" -- "1" User
-    Collection "1" -- "1" User
+    PortalContent "1" o-- "*" NewsPost
+    PortalContent "1" o-- "*" String : reviews
+    PortalContent "1" o-- "*" String : collections
+    PortalContent "1" o-- "*" String : bestGames
+    UserService "1" o-- "*" User
 ```
 
 ## Диаграмма последовательности (Mermaid)
@@ -120,7 +137,7 @@ sequenceDiagram
     participant Session
 
     Клиент->>LoginServlet: POST /login (логин, пароль)
-    LoginServlet->>UserService: validateUser(логин, пароль)
+    LoginServlet->>UserService: authenticate(логин, пароль)
     UserService-->>LoginServlet: User / null
     alt Успешно
         LoginServlet->>Session: setAttribute("user", User)
@@ -128,6 +145,15 @@ sequenceDiagram
     else Ошибка
         LoginServlet-->>Клиент: показать ошибку
     end
+
+    %% Добавлен сценарий добавления контента
+    participant ContentServlet
+    participant PortalContent
+
+    Клиент->>ContentServlet: POST /content (type, title, text)
+    ContentServlet->>PortalContent: addNews()/addReview()/addCollection()
+    PortalContent-->>ContentServlet: (void)
+    ContentServlet-->>Клиент: redirect /content
 ```
 
 ## Быстрый старт

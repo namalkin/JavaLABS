@@ -9,7 +9,7 @@ set DEST_DIR="%TOMCAT_HOME%\webapps\myportal"
 REM === Компиляция сервлетов в build ===
 echo [*] Компиляция Java файлов...
 if exist build rmdir /s /q build
-mkdir build
+mkdir bui
 set "JAVA_FILES="
 for /r webapps\ROOT\WEB-INF\classes %%f in (*.java) do (
     set "JAVA_FILES=!JAVA_FILES! %%f"
@@ -23,6 +23,11 @@ if errorlevel 1 (
 REM === Создание папки uploads, если не существует ===
 if not exist webapps\ROOT\uploads (
     mkdir webapps\ROOT\uploads
+)
+
+REM === Создание папки counters, если не существует ===
+if not exist webapps\ROOT\counters (
+    mkdir webapps\ROOT\counters
 )
 
 REM === Удаление старой версии ===
